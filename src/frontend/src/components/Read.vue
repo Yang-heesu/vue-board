@@ -13,7 +13,7 @@
             </tr>
         </table>
         <button @click="write">글쓰기</button>
-        //v-on:click="write"와 같음
+        <!--v-on:click="write"와 같음-->
     </div>
 </template>
 <script>
@@ -32,6 +32,7 @@
         },
         methods: {
             write() {
+                //url=>'/create'로 이동
                 this.$router.push({
                     path: 'create'
                 })

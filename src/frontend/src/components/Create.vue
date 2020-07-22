@@ -3,7 +3,7 @@
         <input v-model="writer" placeholder="글쓴이"/>
         <input v-model="title" placeholder="제목"/>
         <textarea v-model="content" placeholder="내용"/>
-        <button @click="writer">작성</button>
+        <button @click="write">작성</button>
     </div>
 </template>
 <script>
@@ -17,6 +17,20 @@
                 writer: "",
                 title: "",
                 content: ""
+            }
+        },
+        methods: {
+            write() {
+                //data에 추가해줌
+                this.data.push({
+                    writer: this.writer,
+                    title: this.title,
+                    content: this.content
+                })
+                //main으로 이동
+                this.$router.push({
+                    path: '/'
+                })
             }
         }
     }
