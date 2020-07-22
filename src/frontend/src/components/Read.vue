@@ -13,6 +13,7 @@
             </tr>
         </table>
         <button @click="write">글쓰기</button>
+        //v-on:click="write"와 같음
     </div>
 </template>
 <script>
