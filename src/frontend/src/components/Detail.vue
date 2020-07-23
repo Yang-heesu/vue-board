@@ -21,7 +21,8 @@
         methods: {
             updateData() {
                 this.$router.push({
-                    path: '/'
+                    name: 'Create',
+                    contentId: this.index
                 })
             },
             deleteData() {
