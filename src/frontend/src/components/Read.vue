@@ -34,7 +34,7 @@
             write() {
                 //url=>'/create'로 이동
                 this.$router.push({
-                    path: 'create'
+                    name: 'Create'
                 })
             },
             detail(index) {
