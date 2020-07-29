@@ -9,6 +9,7 @@
     //@/data
     //../data/index.js
 
+    let items = data.Content.sort((a,b)=>{ return b.content_id - a.content_id})
     export default {
         name: 'Board',
         data(){
@@ -27,7 +28,7 @@
                         label: '작성일'
                     }
                 ],
-                items: data.Content
+                items: items
             }
         }
     }
