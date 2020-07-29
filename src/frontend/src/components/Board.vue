@@ -9,11 +9,11 @@
     //@/data
     //../data/index.js
 
-    let items = data.Content.sort((a,b)=>{ return b.content_id - a.content_id})
-    items = items.map(contentItems => {return {...contentItems, user_name: data.User.filter(userItems => userItems.user_id === contentItems.user_id)[0].name}})
     export default {
         name: 'Board',
         data(){
+            let items = data.Content.sort((a,b)=>{ return b.content_id - a.content_id})
+            items = items.map(contentItems => {return {...contentItems, user_name: data.User.filter(userItems => userItems.user_id === contentItems.user_id)[0].name}})
             return {
                 fields: [
                     {
