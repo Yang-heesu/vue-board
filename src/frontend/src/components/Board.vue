@@ -13,7 +13,20 @@
         name: 'Board',
         data(){
             return {
-                fields: ['content_id', 'title', 'created_at'],
+                fields: [
+                    {
+                        key: 'content_id',
+                        label: '글번호'
+                    },
+                    {
+                        key: 'title',
+                        label: '제목'
+                    },
+                    {
+                        key: 'created_at',
+                        label: '작성일'
+                    }
+                ],
                 items: data.Content
             }
         }
