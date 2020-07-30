@@ -3,16 +3,18 @@
         <div :key="item.comment_id" v-for="item in comments">
             <CommentListItem :commentObj="item"/>
         </div>
+        <CommentCreate :contentId="contentId"/>
     </div>
 </template>
 
 <script>
     import data from '../data'
     import CommentListItem from "./CommentListItem";
+    import CommentCreate from "./CommentCreate";
 
     export default {
         name: "CommentList",
-        components: {CommentListItem},
+        components: {CommentCreate, CommentListItem},
         props: {
             contentId: Number
         },
