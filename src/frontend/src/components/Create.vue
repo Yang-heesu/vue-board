@@ -1,45 +1,30 @@
 <template>
     <div>
-        <input v-model="writer" placeholder="글쓴이"/>
-        <input v-model="title" placeholder="제목"/>
-        <textarea v-model="content" placeholder="내용"/>
-        <button @click="index !== undefined ? update() : write()">{{index !== undefined ? "수정":"작성"}}</button>
+        <b-input v-model="subject" placeholder="제목을 입력해 주세요"/>
+        <b-form-textarea id="textarea"
+                         v-model="context"
+                         placeholder="Enter something..."
+                         rows="3"
+                         max-rows="6"/>
+        <b-button>저장</b-button>
+        <b-button @click="cancel">취소</b-button>
     </div>
 </template>
 <script>
-    import data from '../data'
+    //import data from '../data'
 
     export default {
         name: 'Create',
         data() {
-            const index = this.$route.params.contentId
             return {
-                data: data,
-                index: index,
-                writer: index !== undefined ? data[index].writer: "",
-                title: index !== undefined ? data[index].title: "",
-                content: index !== undefined ? data[index].content: "",
+                subject: '',
+                context: ''
             }
         },
         methods: {
-            write() {
-                //data에 추가해줌
-                this.data.push({
-                    writer: this.writer,
-                    title: this.title,
-                    content: this.content
-                })
-                //main으로 이동
+            cancel() {
                 this.$router.push({
-                    path: '/'
-                })
-            },
-            update() {
-                data[this.index].writer = this.writer
-                data[this.index].title = this.title
-                data[this.index].content = this.content
-                this.$router.push({
-                    path: '/'
+                    path: '/board/free'
                 })
             }
         }
