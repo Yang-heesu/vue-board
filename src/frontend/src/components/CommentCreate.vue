@@ -19,7 +19,8 @@
     export default {
         name: "CommentCreate",
         props: {
-            contentId: Number
+            contentId: Number,
+            reloadComment: Function
         },
         data() {
             return {
@@ -37,6 +38,8 @@
                     created_at: '2019-04-29 14:11:11',
                     updated_at: null
                 })
+                this.reloadComment()
+                this.context = ""
             }
         }
     }
