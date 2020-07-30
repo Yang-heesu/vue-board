@@ -6,7 +6,7 @@
                          placeholder="Enter something..."
                          rows="3"
                          max-rows="6"/>
-        <b-button @click="uploadContent">저장</b-button>
+        <b-button @click="updateMode ? updateContent() : uploadContent()">저장</b-button>
         <b-button @click="cancel">취소</b-button>
     </div>
 </template>
@@ -22,10 +22,27 @@
                 userId: 1,
                 createAt: '2019-04-17 11:32:42',
                 updateAt: null,
+                updateObject: null,
+                updateMode: this.$route.params.contentId > 0 ? true : false
             }
+        },
+        created(){
+          if(this.$route.params.contentId > 0) {
+              const contentId= Number(this.$route.params.contentId)
+              this.updateObject = data.Content.filter(item => item.content_id === contentId)[0]
+              this.subject = this.updateObject.title
+              this.context = this.updateObject.context
+          }
         },
         methods: {
             cancel() {
+                this.$router.push({
+                    path: '/board/free'
+                })
+            },
+            updateContent() {
+                this.updateObject.title = this.subject
+                this.updateObject.context = this.context
                 this.$router.push({
                     path: '/board/free'
                 })

@@ -58,7 +58,7 @@
             },
             updateData() {
                 this.$router.push({
-                    path: '/board/free'
+                    path: `/board/free/create/${this.contentId}`
                 })
             }
         }
