@@ -25,7 +25,7 @@ export default new Router({
             component: ContentDetail
         },
         {
-            path: '/board/free/create/:contentId',
+            path: '/board/free/create/:contentId?',
             name: 'Create',
             component: Create
         },
