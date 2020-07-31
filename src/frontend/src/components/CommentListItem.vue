@@ -9,8 +9,12 @@
             <div class="comment-list-item-button">
                 <b-button variant="info">수정</b-button>
                 <b-button variant="info">삭제</b-button>
+                <b-button variant="info" @click="subCommentToggle">덧글 달기</b-button>
             </div>
         </div>
+        <template v-if="subCommentCreateToggle">
+            <CommentCreate :isSubComment="true" :commentId="commentObj.comment_id"/>
+        </template>
         <template v-if="subCommentList.length > 0">
             <div class="comment-list-item-subcomment-list"
                  :key="item.subComment_id"
@@ -31,9 +35,11 @@
 
 <script>
     import data from '../data'
+    import CommentCreate from "./CommentCreate";
 
     export default {
         name: "CommentListItem",
+        components: {CommentCreate},
         props: {
             commentObj: Object
         },
@@ -47,7 +53,13 @@
                         ...subCommentItem,
                         user_name: data.User.filter(
                             item => item.user_id === subCommentItem.user_id)[0].name
-                    }))
+                    })),
+                subCommentCreateToggle: false
+            }
+        },
+        methods: {
+            subCommentToggle() {
+                this.subCommentCreateToggle = !this.subCommentCreateToggle
             }
         }
     }

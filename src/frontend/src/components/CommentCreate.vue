@@ -7,7 +7,7 @@
                             rows="3"
                             max-rows="6"/>
             <b-input-group-addon>
-                <b-button variant="info" @click="createComment">작성하기</b-button>
+                <b-button variant="info" @click="isSubComment ? createSubComment() : createComment()">작성하기</b-button>
             </b-input-group-addon>
         </b-input-group>
     </div>
@@ -20,6 +20,7 @@
         name: "CommentCreate",
         props: {
             contentId: Number,
+            commentId: Number,
             reloadComment: Function
         },
         data() {
@@ -39,6 +40,17 @@
                     updated_at: null
                 })
                 this.reloadComment()
+                this.context = ""
+            },
+            createSubComment() {
+                data.SubComment.push({
+                    subcomment_id: data.SubComment[data.SubComment.length - 1].subcomment_id + 1,
+                    user_id: 1,
+                    comment_id: this.commentId,
+                    context: this.context,
+                    created_at: '2019-04-29 14:11:11',
+                    updated_at: null
+                })
                 this.context = ""
             }
         }
