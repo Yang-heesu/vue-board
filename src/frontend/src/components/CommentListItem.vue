@@ -11,6 +11,21 @@
                 <b-button variant="info">삭제</b-button>
             </div>
         </div>
+        <template v-if="subCommentList.length > 0">
+            <div class="comment-list-item-subcomment-list"
+                 :key="item.subComment_id"
+                 v-for="item in subCommentList">
+                <div class="comment-list-item-name">
+                    <div>{{item.user_name}}</div>
+                    <div>{{item.created_at}}</div>
+                </div>
+                <div class="comment-list-item-context">{{item.context}}</div>
+                <div class="comment-list-item-button">
+                    <b-button variant="info">수정</b-button>
+                    <b-button variant="info">삭제</b-button>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -24,7 +39,15 @@
         },
         data() {
             return {
-                name: data.User.filter(item => item.user_id === this.commentObj.user_id)[0].name
+                name: data.User.filter(
+                    item => item.user_id === this.commentObj.user_id)[0].name,
+                subCommentList: data.SubComment.filter(
+                    item => item.comment_id === this.commentObj.comment_id)
+                    .map(subCommentItem => ({
+                        ...subCommentItem,
+                        user_name: data.User.filter(
+                            item => item.user_id === subCommentItem.user_id)[0].name
+                    }))
             }
         }
     }
