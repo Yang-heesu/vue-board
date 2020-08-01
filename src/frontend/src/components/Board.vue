@@ -1,6 +1,10 @@
 <template>
     <div>
-        <b-table striped hover :items="items" :fields="fields" @row-clicked="rowClick"></b-table>
+        <b-table striped hover :items="items" :fields="fields" @row-clicked="rowClick" :per-page="perPage" :current-page="currentPage"/>
+        <b-pagination v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    align="center"/>
         <b-button @click="writeContent">글쓰기</b-button>
     </div>
 </template>
@@ -16,6 +20,8 @@
             let items = data.Content.sort((a,b)=>{ return b.content_id - a.content_id})
             items = items.map(contentItems => {return {...contentItems, user_name: data.User.filter(userItems => userItems.user_id === contentItems.user_id)[0].name}})
             return {
+                currentPage: 1,
+                perPage: 10,
                 fields: [
                     {
                         key: 'content_id',
@@ -47,6 +53,11 @@
                 this.$router.push({
                     path: '/board/free/create'
                 })
+            }
+        },
+        computed: {
+            rows() {
+                return this.items.length
             }
         }
     }
