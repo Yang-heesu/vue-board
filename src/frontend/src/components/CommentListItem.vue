@@ -13,7 +13,10 @@
             </div>
         </div>
         <template v-if="subCommentCreateToggle">
-            <CommentCreate :isSubComment="true" :commentId="commentObj.comment_id"/>
+            <CommentCreate :isSubComment="true"
+                           :commentId="commentObj.comment_id"
+                           :subCommentToggle="subCommentToggle"
+                           :reloadSubComments="reloadSubComments"/>
         </template>
         <template v-if="subCommentList.length > 0">
             <div class="comment-list-item-subcomment-list"
@@ -60,6 +63,16 @@
         methods: {
             subCommentToggle() {
                 this.subCommentCreateToggle = !this.subCommentCreateToggle
+            },
+            reloadSubComments() {
+                this.subCommentList = data.SubComment.filter(
+                    item => item.comment_id === this.commentObj.comment_id
+                ).map(subCommentItem => ({
+                     ...subCommentItem,
+                     user_name: data.User.filter(
+                         item => item.user_id === subCommentItem.user_id
+                     )[0].name
+                }))
             }
         }
     }

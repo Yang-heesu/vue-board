@@ -21,7 +21,10 @@
         props: {
             contentId: Number,
             commentId: Number,
-            reloadComment: Function
+            isSubComment: Boolean,
+            reloadComment: Function,
+            subCommentToggle: Function,
+            reloadSubComments: Function,
         },
         data() {
             return {
@@ -51,6 +54,8 @@
                     created_at: '2019-04-29 14:11:11',
                     updated_at: null
                 })
+                this.subCommentToggle();
+                this.reloadSubComments()
                 this.context = ""
             }
         }
